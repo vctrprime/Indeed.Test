@@ -1,4 +1,5 @@
 ﻿using Indeed.Test.DataAccess.Repositories.Implementation;
+using Indeed.Test.Factories;
 using Indeed.Test.Models;
 using Indeed.Test.Models.Requests;
 using Indeed.Test.Models.Workers;
@@ -18,9 +19,11 @@ namespace Indeed.Test.DataAccess
 
         private Dictionary<string, object> repositories;
         private readonly string jsonDataFileName;
+        public readonly WorkerFactory workerFactory;
 
         public UnitOfWork()
         {
+            workerFactory = new WorkerFactory();
             jsonDataFileName = string.Format(@"{0}\data.json", Environment.CurrentDirectory);
             if (!Context.isActive)
             {
@@ -38,33 +41,6 @@ namespace Indeed.Test.DataAccess
 
         void FillStaticContext(JObject obj)
         {
-            Worker CreateOjectByFunction(Worker _worker)
-            {
-                int id = _worker.Id;
-                string name = _worker.Name;
-                int? workingRequestId = _worker.WorkingRequestId;
-                Worker worker;
-                switch (_worker.Function)
-                {
-                    case "Operator":
-                        worker = new Operator();
-                        break;
-                    case "Manager":
-                        worker = new Manager();
-                        break;
-                    case "Director":
-                        worker = new Director();
-                        break;
-                    default:
-                        worker = _worker;
-                        break;
-
-                }
-                worker.Id = id;
-                worker.Name = name;
-                worker.WorkingRequestId = workingRequestId;
-                return worker;
-            }
             List<T> GetStaticEntities<T>(string jsonKey)
             {
                 var jsonArray = JArray.Parse(obj[jsonKey].ToString());
@@ -75,8 +51,8 @@ namespace Indeed.Test.DataAccess
             Context.Workers = new List<Worker>();
             workers.ForEach(w =>
             {
-                var a = CreateOjectByFunction(w);
-                Context.Workers.Add(a);
+                var worker = workerFactory.CreateWorker(w);
+                Context.Workers.Add(worker);
             });
             Context.Settings = GetStaticEntities<Settings>("Settings").First();
             Context.Requests = GetStaticEntities<Request>("Requests");

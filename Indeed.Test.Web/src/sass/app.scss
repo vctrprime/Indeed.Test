@@ -64,5 +64,11 @@
                 }
             }
         }
+
+        & #auto-refresh-workers-btn {
+            position: absolute;
+            right: 5px;
+            top: 8px;
+        }
     }
 }

@@ -44,7 +44,10 @@ namespace Indeed.Test.DataAccess.Repositories.Implementation
         public async override Task<Request> Update(Request item)
         {
             Request entryItem = Context.Requests.Find(w => w.Id == item.Id);
-            entryItem = item;
+            entryItem.TakenDate = item.TakenDate;
+            entryItem.Executor = item.Executor;
+            entryItem.ExecutedDate = item.ExecutedDate;
+            entryItem.IsComplete = item.IsComplete;
             SaveContext();
             return item;
         }

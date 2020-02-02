@@ -35,7 +35,19 @@ namespace Indeed.Test.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Update([FromForm]Settings settings)
         {
-            if (ModelState.IsValid)
+            bool ValidateForm()
+            {
+                if (settings.TimeDirector <= settings.TimeManager ||
+                    settings.ExecuteTimeLimitRight <= settings.ExecuteTimeLimitLeft ||
+                    settings.TimeDirector < 5 || settings.TimeDirector > 100 ||
+                    settings.TimeManager < 5 || settings.TimeManager > 100 ||
+                    settings.ExecuteTimeLimitRight < 5 || settings.ExecuteTimeLimitRight > 100 ||
+                    settings.ExecuteTimeLimitLeft < 5 || settings.ExecuteTimeLimitLeft > 100)
+                    return false;
+                return true;
+
+            }
+            if (ValidateForm())
             {
                 try
                 {
@@ -48,7 +60,7 @@ namespace Indeed.Test.Web.Controllers
                 }
 
             }
-            return BadRequest(ModelState);
+            return BadRequest(Json(_repository.Get(0)));
         }
     }
 }

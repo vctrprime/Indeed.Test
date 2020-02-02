@@ -1,5 +1,5 @@
 ﻿export const template = `<div id="grid-requests"></div>
-                        <div id="grid-workers"></div>
+                        <div id="grid-workers" auto-refresh='true'></div>
                         <div id="settings-form-container">
                           <form>
                             <div>
@@ -30,4 +30,5 @@
                                <button class="k-button" type="button">Сохранить</button>
                             </div>
                           </from>
-                        </div>`;
+                        </div>
+                        <button id="auto-refresh-workers-btn" class="k-button">Остановить автообновление</button>`;

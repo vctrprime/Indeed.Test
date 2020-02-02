@@ -7,7 +7,7 @@ namespace Indeed.Test.Models.Workers
 {
     public class Worker : BaseEntity
     {
-        public string Function { get; set; }
+        public string Position { get; set; }
         public int? WorkingRequestId { get; set; }
 
         public string Status { 
@@ -27,7 +27,7 @@ namespace Indeed.Test.Models.Workers
 
         public Worker()
         {
-            Function = this.GetType().Name;
+            Position = this.GetType().Name;
         }        
 
         public virtual bool CheckRequest(Request request, Settings settings)

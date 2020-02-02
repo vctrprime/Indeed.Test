@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indeed.Test.Web", "Indeed.Test.Web\Indeed.Test.Web.csproj", "{CFB8E25B-1811-4F76-B4BA-EB4B5D395869}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indeed.Test.Web", "Indeed.Test.Web\Indeed.Test.Web.csproj", "{CFB8E25B-1811-4F76-B4BA-EB4B5D395869}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{4817DCA4-C8B5-43B6-AE74-17EC2AC44C38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indeed.Test.Models", "Indeed.Test.Models\Indeed.Test.Models.csproj", "{89427888-FA4F-4413-9703-D411E9EE4BC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indeed.Test.Models", "Indeed.Test.Models\Indeed.Test.Models.csproj", "{89427888-FA4F-4413-9703-D411E9EE4BC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indeed.Test.DataAccess", "Indeed.Test.DataAccess\Indeed.Test.DataAccess.csproj", "{1CBBD1EF-4CD8-4557-A816-7FC0A5CCFFB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indeed.Test.DataAccess", "Indeed.Test.DataAccess\Indeed.Test.DataAccess.csproj", "{1CBBD1EF-4CD8-4557-A816-7FC0A5CCFFB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indeed.Test.Factories", "Indeed.Test.Factories\Indeed.Test.Factories.csproj", "{B3BD92B7-2F4C-4AEE-B2A2-3ABFE9B1638E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{1CBBD1EF-4CD8-4557-A816-7FC0A5CCFFB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CBBD1EF-4CD8-4557-A816-7FC0A5CCFFB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CBBD1EF-4CD8-4557-A816-7FC0A5CCFFB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3BD92B7-2F4C-4AEE-B2A2-3ABFE9B1638E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3BD92B7-2F4C-4AEE-B2A2-3ABFE9B1638E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3BD92B7-2F4C-4AEE-B2A2-3ABFE9B1638E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3BD92B7-2F4C-4AEE-B2A2-3ABFE9B1638E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{89427888-FA4F-4413-9703-D411E9EE4BC5} = {4817DCA4-C8B5-43B6-AE74-17EC2AC44C38}
 		{1CBBD1EF-4CD8-4557-A816-7FC0A5CCFFB4} = {4817DCA4-C8B5-43B6-AE74-17EC2AC44C38}
+		{B3BD92B7-2F4C-4AEE-B2A2-3ABFE9B1638E} = {4817DCA4-C8B5-43B6-AE74-17EC2AC44C38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3ECFACE3-8623-47AF-AF5C-B366541EC789}

@@ -24,6 +24,21 @@ $(function () {
   connection.start().catch(err => console.error(err.toString()));
   connection.on("SendMessageToClient",  () => {
     $('#grid-requests').data('kendoGrid').dataSource.read();
-    $('#grid-workers').data('kendoGrid').dataSource.read();
+    if ($('#grid-workers').attr('auto-refresh') === 'true') {
+      $('#grid-workers').data('kendoGrid').dataSource.read();
+    }
+      
   });
+
+  $('#auto-refresh-workers-btn').off().on('click', function () {
+    let autoRefresh = $('#grid-workers').attr('auto-refresh');
+    autoRefresh = autoRefresh === 'false';
+    $('#grid-workers').attr('auto-refresh', autoRefresh);
+    if (autoRefresh) {
+      $('#grid-workers').data('kendoGrid').dataSource.read();
+      $(this).text('Остановить автобновление');
+    }
+    else
+      $(this).text('Возобновить автобновление');
+  })
 })

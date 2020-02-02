@@ -40,7 +40,7 @@ namespace Indeed.Test.Web.Infrastructure.Distributors.Implementations
         {
             get
             {
-                return workers.Where(w => w.WorkingRequestId is null).OrderBy(x => x.Function);
+                return workers.Where(w => w.WorkingRequestId is null).OrderBy(x => x.Position);
             }
         }
         public IEnumerable<Request> NotTakenRequest { 
@@ -90,7 +90,7 @@ namespace Indeed.Test.Web.Infrastructure.Distributors.Implementations
                         Debug.WriteLine($"Запрос {request.Id} подходит {worker.Name}!");
                         Random random = new Random();
                         request.TakenDate = DateTime.Now.Ticks;
-                        request.Executor = $"{worker.Function} {worker.Name}";
+                        request.Executor = $"{worker.Position} {worker.Name}";
                         request.ExecutedDate = DateTime.Now.AddSeconds(random.Next(activeSettings.ExecuteTimeLimitLeft, activeSettings.ExecuteTimeLimitRight)).Ticks;
                         worker.WorkingRequestId = request.Id;
                         SaveChanges(request, worker);

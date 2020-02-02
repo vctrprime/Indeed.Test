@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Indeed.Test.Factories\Indeed.Test.Factories.csproj" />
     <ProjectReference Include="..\Indeed.Test.Models\Indeed.Test.Models.csproj" />
   </ItemGroup>
 

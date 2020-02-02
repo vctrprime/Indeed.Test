@@ -1,4 +1,5 @@
-﻿using Indeed.Test.Models.Workers;
+﻿using Indeed.Test.Factories;
+using Indeed.Test.Models.Workers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,10 @@ namespace Indeed.Test.DataAccess.Repositories.Implementation
 {
     public class WorkerRepository : Repository<Worker>
     {
+        private readonly WorkerFactory workerFactory;
         public WorkerRepository(string jsonDataFileName) : base(jsonDataFileName)
         {
+            workerFactory = new WorkerFactory();
         }
 
         public async override Task<Worker> Create(Worker item)
@@ -34,6 +37,8 @@ namespace Indeed.Test.DataAccess.Repositories.Implementation
         public async override Task<int> Remove(int id)
         {
             Worker entryItem = Context.Workers.Find(w => w.Id == id);
+            if (entryItem.WorkingRequestId.HasValue)
+                throw new Exception("Нельзя удалить работника при исполнении запроса!");
             Context.Workers.Remove(entryItem);
             id = 0;
             SaveContext();
@@ -42,8 +47,11 @@ namespace Indeed.Test.DataAccess.Repositories.Implementation
 
         public async override Task<Worker> Update(Worker item)
         {
-            Worker entryItem = Context.Workers.Find(w => w.Id == item.Id);
-            entryItem = item;
+            var entryItem = Context.Workers.Find(w => w.Id == item.Id);
+            if ((item.Name != entryItem.Name || item.Position != entryItem.Position) && entryItem.WorkingRequestId.HasValue)
+                throw new Exception("Нельзя изменить работника при исполнении запроса!");
+            int index = Context.Workers.IndexOf(entryItem);
+            Context.Workers[index] = item;
             SaveContext();
             return item;
         }
