@@ -7,6 +7,6 @@
 6)В основном проекте вроде предусмотрел все "mistake-proofing", в консоль не стал уделять этому много времени.
 
 API endpoints:
-создание запроса - /requests/create
-отмена запроса - /requests/cancel/{id}
-получение запроса - /requests/get/{id}
+создание запроса - api/requests/create
+отмена запроса - api/requests/cancel/{id}
+получение запроса - api/requests/get/{id}
