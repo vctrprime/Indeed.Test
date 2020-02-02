@@ -99,7 +99,11 @@ namespace Indeed.Test.Web.Controllers
             {
                 var result = await _repository.Remove(id.Value);
                 if (result == 0)
+                {
+                    if (hubContext != null)
+                        await hubContext.Clients.All.SendMessageToClient();
                     return Ok($"Запрос {id} успешно отменен!");
+                }
                 return BadRequest();
             }
             catch(NullReferenceException e)

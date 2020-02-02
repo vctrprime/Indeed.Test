@@ -30,7 +30,9 @@ namespace Indeed.Test.DataAccess.Repositories.Implementation
                 Settings = new List<Settings>() { Context.Settings },
                 Requests = Context.Requests
             });
-            File.WriteAllText(_jsonDataFileName, json);
+            try { File.WriteAllText(_jsonDataFileName, json); }
+            catch { }
+            
 
         }
 
