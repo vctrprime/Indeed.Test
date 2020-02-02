@@ -1,0 +1,32 @@
+{
+  "name": "Indeed.Test.Web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --progress --profile",
+    "watch": "webpack --progress --profile --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aspnet/signalr": "^1.1.4",
+    "@progress/kendo-theme-default": "^2.54.1",
+    "@progress/kendo-ui": "2019.3.1023",
+    "css-loader": "^0.28.11",
+    "extract-loader": "^2.0.1",
+    "file-loader": "^1.1.11",
+    "jquery": "^3.2.1",
+    "node-sass": "^4.13.0",
+    "popper.js": "^1.12.6",
+    "sass-loader": "^7.3.1",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.15"
+  }
+}

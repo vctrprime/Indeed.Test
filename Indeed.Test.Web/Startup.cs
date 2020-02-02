@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Indeed.Test.Web.Infrastructure.Distributors;
+using Indeed.Test.Web.Infrastructure.Distributors.Implementations;
+using Indeed.Test.Web.Infrastructure.Hubs;
+using Indeed.Test.Web.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,8 +35,11 @@ namespace Indeed.Test.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddSingleton<IDistributor, RequestsDistributor>();
+            services.AddHostedService<RequestChecker>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSignalR();
+            services.AddScoped<DistributeHub>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +65,11 @@ namespace Indeed.Test.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<DistributeHub>("/distributeHub");
             });
         }
     }
