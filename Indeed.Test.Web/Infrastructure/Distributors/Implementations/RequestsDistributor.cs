@@ -76,7 +76,7 @@ namespace Indeed.Test.Web.Infrastructure.Distributors.Implementations
                     }
                 }
             }
-            void DistrubuteForFreeWorkers()
+            void DistributeForFreeWorkers()
             {
                 foreach (var worker in FreeWorkers)
                 {
@@ -100,7 +100,7 @@ namespace Indeed.Test.Web.Infrastructure.Distributors.Implementations
 
 
             CheckTakenRequests();
-            DistrubuteForFreeWorkers();
+            DistributeForFreeWorkers();
 
             Debug.WriteLine($"Запросов в очереди: {NotTakenRequest.Count()}");
             if (FreeWorkers.Count() == 0)
