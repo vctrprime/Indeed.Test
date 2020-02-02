@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indeed.Test.DataAccess", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indeed.Test.Factories", "Indeed.Test.Factories\Indeed.Test.Factories.csproj", "{B3BD92B7-2F4C-4AEE-B2A2-3ABFE9B1638E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indeed.Test.UnitTests", "Indeed.Test.UnitTests\Indeed.Test.UnitTests.csproj", "{E8AB4BF1-CFBB-4BF3-9555-1E9EB27B3302}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{B3BD92B7-2F4C-4AEE-B2A2-3ABFE9B1638E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3BD92B7-2F4C-4AEE-B2A2-3ABFE9B1638E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3BD92B7-2F4C-4AEE-B2A2-3ABFE9B1638E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8AB4BF1-CFBB-4BF3-9555-1E9EB27B3302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8AB4BF1-CFBB-4BF3-9555-1E9EB27B3302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8AB4BF1-CFBB-4BF3-9555-1E9EB27B3302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8AB4BF1-CFBB-4BF3-9555-1E9EB27B3302}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

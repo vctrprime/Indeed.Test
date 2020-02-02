@@ -10,10 +10,8 @@ namespace Indeed.Test.DataAccess.Repositories.Implementation
 {
     public class WorkerRepository : Repository<Worker>
     {
-        private readonly WorkerFactory workerFactory;
         public WorkerRepository(string jsonDataFileName) : base(jsonDataFileName)
         {
-            workerFactory = new WorkerFactory();
         }
 
         public async override Task<Worker> Create(Worker item)

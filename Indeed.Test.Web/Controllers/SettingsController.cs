@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Indeed.Test.DataAccess.Repositories;
 using Indeed.Test.DataAccess.Repositories.Implementation;
 using Indeed.Test.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,13 @@ namespace Indeed.Test.Web.Controllers
 {
     public class SettingsController : BaseController
     {
-        private readonly SettingsRepository _repository;
-        public SettingsController()
+        private readonly IRepository<Settings> _repository;
+        public SettingsController(IRepository<Settings> repository = null)
         {
-            _repository = Context.Repository<Settings>() as SettingsRepository;
+            if (repository is null)
+                _repository = Context.Repository<Settings>() as SettingsRepository;
+            else
+                _repository = repository;
         }
 
         [HttpGet]

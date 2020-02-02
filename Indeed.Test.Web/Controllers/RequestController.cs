@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Indeed.Test.DataAccess.Repositories;
 using Indeed.Test.DataAccess.Repositories.Implementation;
 using Indeed.Test.Models.Requests;
 using Indeed.Test.Web.Infrastructure.Hubs;
@@ -14,11 +15,14 @@ namespace Indeed.Test.Web.Controllers
     [ApiController]
     public class RequestController : BaseController
     {
-        private readonly RequestRepository _repository;
+        private readonly IRepository<Request> _repository;
         private readonly IHubContext<DistributeHub, ITypedHubClient> hubContext;
-        public RequestController(IHubContext<DistributeHub, ITypedHubClient> hub)
+        public RequestController(IHubContext<DistributeHub, ITypedHubClient> hub = null, IRepository<Request> repository = null)
         {
-            _repository = Context.Repository<Request>() as RequestRepository;
+            if (repository is null)
+                _repository = Context.Repository<Request>() as RequestRepository;
+            else
+                _repository = repository;
             hubContext = hub;
         }
 
@@ -30,7 +34,7 @@ namespace Indeed.Test.Web.Controllers
                 var result = await _repository.GetAll();
                 if (result is null)
                     return NotFound();
-                return Ok(result.OrderByDescending(x => x.CreatedDate));
+                return Ok(result.OrderByDescending(x => x.CreatedDate).ToList());
             }
             catch (Exception)
             {
@@ -67,11 +71,12 @@ namespace Indeed.Test.Web.Controllers
                     request = await _repository.Create(request);
                     if (request.Id > 0)
                     {
-                        await hubContext.Clients.All.SendMessageToClient();
+                        if (hubContext != null)
+                            await hubContext.Clients.All.SendMessageToClient();
                         return Ok(request);
                     }
                         
-                    return NotFound();
+                    return BadRequest();
 
                 }
                 catch (Exception e)
@@ -95,7 +100,7 @@ namespace Indeed.Test.Web.Controllers
                 var result = await _repository.Remove(id.Value);
                 if (result == 0)
                     return Ok($"Запрос {id} успешно отменен!");
-                return NotFound();
+                return BadRequest();
             }
             catch(NullReferenceException e)
             {

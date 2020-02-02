@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Indeed.Test.DataAccess.Repositories;
 using Indeed.Test.DataAccess.Repositories.Implementation;
 using Indeed.Test.Models.Workers;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,13 @@ namespace Indeed.Test.Web.Controllers
     [Route("[controller]s")]
     public class WorkerController : BaseController
     {
-        private readonly WorkerRepository _repository;
-        public WorkerController()
+        private readonly IRepository<Worker> _repository;
+        public WorkerController(IRepository<Worker> repository = null)
         {
-            _repository = Context.Repository<Worker>() as WorkerRepository;
+            if (repository is null)
+                _repository = Context.Repository<Worker>() as WorkerRepository;
+            else
+                _repository = repository;
         }
 
         [HttpGet]
