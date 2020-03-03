@@ -1,4 +1,5 @@
 ﻿import $ from 'jquery';
+import validate from 'jquery-validation'
 window.jQuery = $; window.$ = $;
 const signalR = require("@aspnet/signalr");
 
@@ -14,7 +15,6 @@ import { default as getSettings } from './settings/get';
 
 
 $(function () {
-  $('body').append(template);
   createRequestsGrid();
   createWorkersGrid();
   getSettings();

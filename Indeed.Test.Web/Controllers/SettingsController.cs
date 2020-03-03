@@ -21,11 +21,11 @@ namespace Indeed.Test.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
             try
             {
-                var result = await _repository.Get(0);
+                var result = _repository.Get(0);
                 if (result is null)
                     return NotFound();
                 return Ok(result);
@@ -39,32 +39,15 @@ namespace Indeed.Test.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Update([FromForm]Settings settings)
         {
-            bool ValidateForm()
+            try
             {
-                if (settings.TimeDirector <= settings.TimeManager ||
-                    settings.ExecuteTimeLimitRight <= settings.ExecuteTimeLimitLeft ||
-                    settings.TimeDirector < 5 || settings.TimeDirector > 100 ||
-                    settings.TimeManager < 5 || settings.TimeManager > 100 ||
-                    settings.ExecuteTimeLimitRight < 5 || settings.ExecuteTimeLimitRight > 100 ||
-                    settings.ExecuteTimeLimitLeft < 5 || settings.ExecuteTimeLimitLeft > 100)
-                    return false;
-                return true;
-
+                settings = await _repository.UpdateAsync(settings);
+                return Ok(settings);
             }
-            if (ValidateForm())
+            catch (Exception e)
             {
-                try
-                {
-                    settings = await _repository.Update(settings);
-                    return Ok(settings);
-                }
-                catch (Exception e)
-                {
-                    return BadRequest(e.Message);
-                }
-
+                return BadRequest(e.Message);
             }
-            return BadRequest(Json(_repository.Get(0)));
         }
     }
 }

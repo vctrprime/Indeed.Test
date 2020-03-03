@@ -1,4 +1,5 @@
 using Indeed.Test.DataAccess.Repositories;
+using Indeed.Test.Factories;
 using Indeed.Test.Models.Requests;
 using Indeed.Test.UnitTests.Repositories;
 using Indeed.Test.Web.Controllers;
@@ -18,7 +19,7 @@ namespace Indeed.Test.UnitTests
         public RequestControllerTest()
         {
             _repository = new RequestRepositoryTest();
-            _controller = new RequestController(repository: _repository);
+            _controller = new RequestController(factory: new BaseFactory(), repository: _repository);
         }
 
         #region GetAll
@@ -26,12 +27,12 @@ namespace Indeed.Test.UnitTests
         public void GetAllRequestsReturnsOkResult()
         {
             var okResult = _controller.Get();
-            Assert.IsType<OkObjectResult>(okResult.Result);
+            Assert.IsType<OkObjectResult>(okResult);
         }
         [Fact]
         public void GetAllRequests()
         {
-            var okResult = _controller.Get().Result as OkObjectResult;
+            var okResult = _controller.Get() as OkObjectResult;
             var items = Assert.IsType<List<Request>>(okResult.Value);
             Assert.Equal(3, items.Count);
         }
@@ -42,18 +43,18 @@ namespace Indeed.Test.UnitTests
         public void GetReturnsBadResult()
         {
             var badResult = _controller.Get(65);
-            Assert.IsType<BadRequestObjectResult>(badResult.Result);
+            Assert.IsType<BadRequestObjectResult>(badResult);
         }
         [Fact]
         public void GetReturnsOkResult()
         {
             var okResult = _controller.Get(1);
-            Assert.IsType<OkObjectResult>(okResult.Result);
+            Assert.IsType<OkObjectResult>(okResult);
         }
         [Fact]
         public void GetReturnsRightItem()
         {
-            var okResult = _controller.Get(1).Result as OkObjectResult;
+            var okResult = _controller.Get(1) as OkObjectResult;
             Assert.IsType<Request>(okResult.Value);
             Assert.Equal(1, (okResult.Value as Request).Id);
         }
@@ -105,7 +106,7 @@ namespace Indeed.Test.UnitTests
         public void DeleteRemovesOneItem()
         {
             var okResult = _controller.Delete(3);
-            var allItemsResult = _controller.Get().Result as OkObjectResult;
+            var allItemsResult = _controller.Get() as OkObjectResult;
             var items = Assert.IsType<List<Request>>(allItemsResult.Value);
             Assert.Equal(2, items.Count);
         }

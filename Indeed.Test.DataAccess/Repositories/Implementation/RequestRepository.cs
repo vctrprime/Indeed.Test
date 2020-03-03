@@ -12,44 +12,54 @@ namespace Indeed.Test.DataAccess.Repositories.Implementation
         public RequestRepository(string jsonDataFileName) : base(jsonDataFileName)
         {
         }
-        public async override Task<Request> Create(Request item)
+        public async override Task<Request> CreateAsync(Request item)
         {
             item.Id = Context.Requests.Count > 0 ? Context.Requests.Max(w => w.Id) + 1 : 1;
             Context.Requests.Add(item);
-            SaveContext();
+            await SaveContext();
             return item;
         }
 
-        public async override Task<Request> Get(int id)
+        public override Request Get(int id)
         {
             return Context.Requests.Find(w => w.Id == id);
         }
 
-        public async override Task<IEnumerable<Request>> GetAll()
+        public override IEnumerable<Request> GetAll()
         {
             return Context.Requests;
         }
 
-        public async override Task<int> Remove(int id)
+        public async override Task<int> RemoveAsync(int id)
         {
             Request entryItem = Context.Requests.Find(w => w.Id == id);
             if (!string.IsNullOrEmpty(entryItem.Executor))
                 throw new Exception("Нельзя отменить исполняемый или завершенный запрос!");
             Context.Requests.Remove(entryItem);
             id = 0;
-            SaveContext();
+            await SaveContext();
             return id;
         }
 
-        public async override Task<Request> Update(Request item)
+        public async override Task<Request> UpdateAsync(Request item)
         {
-            Request entryItem = Context.Requests.Find(w => w.Id == item.Id);
-            entryItem.TakenDate = item.TakenDate;
-            entryItem.Executor = item.Executor;
-            entryItem.ExecutedDate = item.ExecutedDate;
-            entryItem.IsComplete = item.IsComplete;
-            SaveContext();
+            while (true)
+            {
+                try
+                {
+                    Request entryItem = Context.Requests.Find(w => w.Id == item.Id);
+                    entryItem.TakenDate = item.TakenDate;
+                    entryItem.Executor = item.Executor;
+                    entryItem.ExecutedDate = item.ExecutedDate;
+                    entryItem.IsComplete = item.IsComplete;
+                    await SaveContext();
+                    break;
+                }
+                catch { }
+            }
             return item;
+
+
         }
     }
 }

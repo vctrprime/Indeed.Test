@@ -49,24 +49,24 @@ namespace Indeed.Test.UnitTests.Repositories
                 }
             };
         }
-        public async Task<Request> Create(Request item)
+        public async Task<Request> CreateAsync(Request item)
         {
             item.Id = _requests.Count > 0 ? _requests.Max(w => w.Id) + 1 : 1;
             _requests.Add(item);
             return item;
         }
 
-        public async Task<Request> Get(int id)
+        public Request Get(int id)
         {
             return _requests.Find(w => w.Id == id);
         }
 
-        public async Task<IEnumerable<Request>> GetAll()
+        public IEnumerable<Request> GetAll()
         {
             return _requests;
         }
 
-        public async Task<int> Remove(int id)
+        public async Task<int> RemoveAsync(int id)
         {
             Request entryItem = _requests.Find(w => w.Id == id);
             if (!string.IsNullOrEmpty(entryItem.Executor))
@@ -76,7 +76,7 @@ namespace Indeed.Test.UnitTests.Repositories
             return id;
         }
 
-        public async Task<Request> Update(Request item)
+        public async Task<Request> UpdateAsync(Request item)
         {
             Request entryItem = _requests.Find(w => w.Id == item.Id);
             entryItem.TakenDate = item.TakenDate;

@@ -11,30 +11,30 @@ namespace Indeed.Test.DataAccess.Repositories.Implementation
         public SettingsRepository(string jsonDataFileName) : base(jsonDataFileName)
         {
         }
-        public override Task<Settings> Create(Settings item)
+        public override Task<Settings> CreateAsync(Settings item)
         {
             throw new NotImplementedException();
         }
 
-        public async override Task<Settings> Get(int id)
+        public override Settings Get(int id)
         {
             return Context.Settings;
         }
 
-        public override Task<IEnumerable<Settings>> GetAll()
+        public override IEnumerable<Settings> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public override Task<int> Remove(int id)
+        public override Task<int> RemoveAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async override Task<Settings> Update(Settings item)
+        public async override Task<Settings> UpdateAsync(Settings item)
         {
             Context.Settings = item;
-            SaveContext();
+            await SaveContext();
             return item;
         }
     }

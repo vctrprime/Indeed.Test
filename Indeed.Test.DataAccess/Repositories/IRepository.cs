@@ -7,11 +7,11 @@ namespace Indeed.Test.DataAccess.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<IEnumerable<TEntity>> GetAll();
-        Task<TEntity> Get(int id);
-        Task<TEntity> Create(TEntity item);
-        Task<TEntity> Update(TEntity item);
-        Task<int> Remove(int id);
+        IEnumerable<TEntity> GetAll();
+        TEntity Get(int id);
+        Task<TEntity> CreateAsync(TEntity item);
+        Task<TEntity> UpdateAsync(TEntity item);
+        Task<int> RemoveAsync(int id);
 
     }
 

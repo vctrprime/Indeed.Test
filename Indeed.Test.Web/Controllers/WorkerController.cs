@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Indeed.Test.DataAccess.Repositories;
 using Indeed.Test.DataAccess.Repositories.Implementation;
+using Indeed.Test.Factories;
 using Indeed.Test.Models.Workers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,8 +14,10 @@ namespace Indeed.Test.Web.Controllers
     public class WorkerController : BaseController
     {
         private readonly IRepository<Worker> _repository;
-        public WorkerController(IRepository<Worker> repository = null)
+        private readonly IBaseFactory _factory;
+        public WorkerController(IBaseFactory factory, IRepository<Worker> repository = null)
         {
+            _factory = factory;
             if (repository is null)
                 _repository = Context.Repository<Worker>() as WorkerRepository;
             else
@@ -22,11 +25,11 @@ namespace Indeed.Test.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
             try
             {
-                var result = await _repository.GetAll();
+                var result = _repository.GetAll();
                 if (result is null)
                     return NotFound();
                 return Ok(result);
@@ -44,8 +47,8 @@ namespace Indeed.Test.Web.Controllers
             {
                 try
                 {
-                    worker = Context.workerFactory.CreateWorker(worker);
-                    worker = await _repository.Create(worker);
+                    worker = _factory.CreateWorker(worker);
+                    worker = await _repository.CreateAsync(worker);
                     if (worker.Id > 0)
                     {
                         return Ok(worker);
@@ -70,8 +73,8 @@ namespace Indeed.Test.Web.Controllers
             {
                 try
                 {
-                    worker = Context.workerFactory.CreateWorker(worker);
-                    worker = await _repository.Update(worker);
+                    worker = _factory.CreateWorker(worker);
+                    worker = await _repository.UpdateAsync(worker);
                     return Ok(worker);
                 }
                 catch (Exception e)
@@ -94,7 +97,7 @@ namespace Indeed.Test.Web.Controllers
             {
                 try
                 {
-                    var result = await _repository.Remove(worker.Id);
+                    var result = await _repository.RemoveAsync(worker.Id);
                     if (result == 0)
                         return Ok(worker);
                 }

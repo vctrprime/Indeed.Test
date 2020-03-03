@@ -57,11 +57,11 @@ namespace Indeed.Test.Web.Infrastructure.Distributors.Implementations
             }
         }
 
-        public async void Distribute()
+        public void Distribute()
         {
-            activeRequests = requestRepository.GetAll().Result.Where(r => !r.IsComplete);
-            workers = workerRepository.GetAll().Result;
-            activeSettings = settingsRepository.Get(0).Result;
+            activeRequests = requestRepository.GetAll().Where(r => !r.IsComplete);
+            workers = workerRepository.GetAll();
+            activeSettings = settingsRepository.Get(0);
 
             void CheckTakenRequests() {
                 foreach (var request in TakenRequest)
@@ -110,8 +110,8 @@ namespace Indeed.Test.Web.Infrastructure.Distributors.Implementations
 
         private async void SaveChanges(Request request, Worker worker)
         {
-            await requestRepository.Update(request);
-            await workerRepository.Update(worker);
+            await requestRepository.UpdateAsync(request);
+            await workerRepository.UpdateAsync(worker);
             await hubContext.Clients.All.SendMessageToClient();
         }
     }

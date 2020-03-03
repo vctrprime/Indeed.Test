@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -19,11 +20,11 @@ namespace Indeed.Test.DataAccess
 
         private Dictionary<string, object> repositories;
         private readonly string jsonDataFileName;
-        public readonly WorkerFactory workerFactory;
+        private readonly IBaseFactory _factory;
 
         public UnitOfWork()
         {
-            workerFactory = new WorkerFactory();
+            _factory = new BaseFactory();
             jsonDataFileName = string.Format(@"{0}\data.json", Environment.CurrentDirectory);
             if (!Context.isActive)
             {
@@ -39,25 +40,19 @@ namespace Indeed.Test.DataAccess
             }
         }
 
-        void FillStaticContext(JObject obj)
+        private void FillStaticContext(JObject obj)
         {
-            List<T> GetStaticEntities<T>(string jsonKey)
-            {
-                var jsonArray = JArray.Parse(obj[jsonKey].ToString());
-                return JsonConvert.DeserializeObject<List<T>>(jsonArray.ToString());
-            }
-
-            var workers = GetStaticEntities<Worker>("Workers");
+            var workers = GetStaticEntities<Worker>(obj, "Workers");
             Context.Workers = new List<Worker>();
-            workers.ForEach(w =>
+            foreach(var w in workers)
             {
-                var worker = workerFactory.CreateWorker(w);
+                var worker = _factory.CreateWorker(w);
                 Context.Workers.Add(worker);
-            });
-            Context.Settings = GetStaticEntities<Settings>("Settings").First();
-            Context.Requests = GetStaticEntities<Request>("Requests");
+            }
+            Context.Requests = GetStaticEntities<Request>(obj, "Requests");
+            Context.Settings = GetStaticEntity<Settings>(obj, "Settings");
         }
-
+        
         public Repository<T> Repository<T>() where T : class, new()
         {
             if (repositories == null)
@@ -80,9 +75,20 @@ namespace Indeed.Test.DataAccess
             return (Repository<T>)repositories[type];
         }
 
-        #region IDisposable
+        private List<T> GetStaticEntities<T>(JObject obj,string jsonKey)
+        {
+            var jsonArray = JArray.Parse(obj[jsonKey].ToString());
+            return JsonConvert.DeserializeObject<List<T>>(jsonArray.ToString());
+        }
+        private T GetStaticEntity<T>(JObject obj, string jsonKey)
+        {
+            var jsonObject = JObject.Parse(obj[jsonKey].ToString());
+            return JsonConvert.DeserializeObject<T>(jsonObject.ToString());
+            
+        }
+    #region IDisposable
 
-        private bool _disposed;
+    private bool _disposed;
 
         public void Dispose()
         {

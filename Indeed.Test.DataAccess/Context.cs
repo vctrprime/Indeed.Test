@@ -3,6 +3,7 @@ using Indeed.Test.Models.Requests;
 using Indeed.Test.Models.Workers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Indeed.Test.DataAccess

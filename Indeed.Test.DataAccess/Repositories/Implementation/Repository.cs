@@ -11,29 +11,42 @@ namespace Indeed.Test.DataAccess.Repositories.Implementation
     public abstract partial class Repository<T> : IRepository<T> where T : class, new()
     {
         protected readonly string _jsonDataFileName;
-        public abstract Task<IEnumerable<T>> GetAll();
-        public abstract Task<T> Get(int id);
-        public abstract Task<T> Create(T item);
-        public abstract Task<T> Update(T item);
-        public abstract Task<int> Remove(int id);
+        public abstract IEnumerable<T> GetAll();
+        public abstract T Get(int id);
+        public abstract Task<T> CreateAsync(T item);
+        public abstract Task<T> UpdateAsync(T item);
+        public abstract Task<int> RemoveAsync(int id);
 
         protected Repository(string jsonDataFileName)
         {
             _jsonDataFileName = jsonDataFileName;
         }
 
-        protected void SaveContext()
+        protected async Task SaveContext()
         {
             string json = JsonConvert.SerializeObject(new
             {
                 Workers = Context.Workers,
-                Settings = new List<Settings>() { Context.Settings },
+                Settings = Context.Settings,
                 Requests = Context.Requests
             });
-            try { File.WriteAllText(_jsonDataFileName, json); }
-            catch { }
-            
 
+            var buffer = Encoding.UTF8.GetBytes(json);
+            while (true)
+            {
+                try
+                {
+                    using (var fs = new FileStream(_jsonDataFileName, FileMode.OpenOrCreate,
+                FileAccess.Write, FileShare.None, buffer.Length, true))
+                    {
+                        await fs.WriteAsync(buffer, 0, buffer.Length);
+                        fs.Close();
+                        break;
+                    }
+                }
+                catch { }
+            }
+            
         }
 
 

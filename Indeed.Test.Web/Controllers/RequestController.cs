@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Indeed.Test.DataAccess.Repositories;
 using Indeed.Test.DataAccess.Repositories.Implementation;
+using Indeed.Test.Factories;
 using Indeed.Test.Models.Requests;
 using Indeed.Test.Web.Infrastructure.Hubs;
 using Microsoft.AspNetCore.Mvc;
@@ -17,8 +18,10 @@ namespace Indeed.Test.Web.Controllers
     {
         private readonly IRepository<Request> _repository;
         private readonly IHubContext<DistributeHub, ITypedHubClient> hubContext;
-        public RequestController(IHubContext<DistributeHub, ITypedHubClient> hub = null, IRepository<Request> repository = null)
+        private readonly IBaseFactory _factory;
+        public RequestController(IBaseFactory factory, IHubContext<DistributeHub, ITypedHubClient> hub = null, IRepository<Request> repository = null)
         {
+            _factory = factory;
             if (repository is null)
                 _repository = Context.Repository<Request>() as RequestRepository;
             else
@@ -27,11 +30,11 @@ namespace Indeed.Test.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
             try
             {
-                var result = await _repository.GetAll();
+                var result =  _repository.GetAll();
                 if (result is null)
                     return NotFound();
                 return Ok(result.OrderByDescending(x => x.CreatedDate).ToList());
@@ -43,11 +46,11 @@ namespace Indeed.Test.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public IActionResult Get(int id)
         {
             try
             {
-                var result = await _repository.Get(id);
+                var result = _repository.Get(id);
                 if (result is null)
                     return BadRequest($"Запрос {id} не найден!");
                 return Ok(result);
@@ -61,14 +64,12 @@ namespace Indeed.Test.Web.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody]Request request)
         {
-            request.Name = string.IsNullOrEmpty(request.Name) ? "unknown" : request.Name;
-            request.CreatedBy = string.IsNullOrEmpty(request.CreatedBy) ? "unknown" : request.CreatedBy;
-            request.CreatedDate = DateTime.Now.Ticks;
+            request = _factory.CreateRequest(request);
             if (ModelState.IsValid)
             {
                 try
                 {
-                    request = await _repository.Create(request);
+                    request = await _repository.CreateAsync(request);
                     if (request.Id > 0)
                     {
                         if (hubContext != null)
@@ -97,7 +98,7 @@ namespace Indeed.Test.Web.Controllers
             }
             try
             {
-                var result = await _repository.Remove(id.Value);
+                var result = await _repository.RemoveAsync(id.Value);
                 if (result == 0)
                 {
                     if (hubContext != null)
