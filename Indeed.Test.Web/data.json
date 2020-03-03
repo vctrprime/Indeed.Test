@@ -1,1 +1,195 @@
-{"Workers":[{"Position":"Director","WorkingRequestId":null,"Status":"Свободен","StatusColor":"#00FF7F","Id":1,"Name":"John"},{"Position":"Manager","WorkingRequestId":null,"Status":"Свободен","StatusColor":"#00FF7F","Id":2,"Name":"Bob"},{"Position":"Operator","WorkingRequestId":null,"Status":"Свободен","StatusColor":"#00FF7F","Id":3,"Name":"Alisa"},{"Position":"Operator","WorkingRequestId":null,"Status":"Свободен","StatusColor":"#00FF7F","Id":4,"Name":"Ivan"}],"Settings":{"TimeManager":10,"TimeDirector":30,"ExecuteTimeLimitLeft":10,"ExecuteTimeLimitRight":40},"Requests":[{"CreatedBy":"autotest","CreatedDate":637188806627979513,"TakenDate":637188806628738189,"ExecutedDate":637188807008743043,"Executor":"Operator Alisa","IsComplete":true,"WatingTime":0,"ExecutedTime":38,"SummaryTime":38,"Status":"Запрос выполнен","StatusColor":"#00FF7F","Id":1,"Name":"test1"},{"CreatedBy":"autotest","CreatedDate":637188806647568573,"TakenDate":637188806649234049,"ExecutedDate":637188806929249128,"Executor":"Operator Ivan","IsComplete":true,"WatingTime":0,"ExecutedTime":28,"SummaryTime":28,"Status":"Запрос выполнен","StatusColor":"#00FF7F","Id":2,"Name":"test1"},{"CreatedBy":"autotest","CreatedDate":637188806665273371,"TakenDate":637188806768505326,"ExecutedDate":637188807068505396,"Executor":"Manager Bob","IsComplete":true,"WatingTime":10,"ExecutedTime":30,"SummaryTime":40,"Status":"Запрос выполнен","StatusColor":"#00FF7F","Id":3,"Name":"test1"},{"CreatedBy":"autotest","CreatedDate":637188806680272430,"TakenDate":637188806938737199,"ExecutedDate":637188807158737263,"Executor":"Operator Ivan","IsComplete":true,"WatingTime":25,"ExecutedTime":22,"SummaryTime":47,"Status":"Запрос выполнен","StatusColor":"#00FF7F","Id":4,"Name":"test1"},{"CreatedBy":"autotest","CreatedDate":637188806695622041,"TakenDate":637188806998497856,"ExecutedDate":637188807108498159,"Executor":"Director John","IsComplete":true,"WatingTime":30,"ExecutedTime":11,"SummaryTime":41,"Status":"Запрос выполнен","StatusColor":"#00FF7F","Id":5,"Name":"test1"},{"CreatedBy":"autotest","CreatedDate":637188806708332130,"TakenDate":637188807019005614,"ExecutedDate":637188807369005669,"Executor":"Operator Alisa","IsComplete":true,"WatingTime":31,"ExecutedTime":35,"SummaryTime":66,"Status":"Запрос выполнен","StatusColor":"#00FF7F","Id":6,"Name":"test1"},{"CreatedBy":"autotest","CreatedDate":637188806720344877,"TakenDate":637188807078650085,"ExecutedDate":637188807268650116,"Executor":"Manager Bob","IsComplete":true,"WatingTime":35,"ExecutedTime":19,"SummaryTime":54,"Status":"Запрос выполнен","StatusColor":"#00FF7F","Id":7,"Name":"test1"},{"CreatedBy":"autotest","CreatedDate":637188806993775726,"TakenDate":637188807168632530,"ExecutedDate":637188807548632582,"Executor":"Operator Ivan","IsComplete":true,"WatingTime":17,"ExecutedTime":38,"SummaryTime":55,"Status":"Запрос выполнен","StatusColor":"#00FF7F","Id":8,"Name":"test1"},{"CreatedBy":"autotest","CreatedDate":637188807007385524,"TakenDate":637188807278827786,"ExecutedDate":637188807608827861,"Executor":"Manager Bob","IsComplete":true,"WatingTime":27,"ExecutedTime":33,"SummaryTime":60,"Status":"Запрос выполнен","StatusColor":"#00FF7F","Id":9,"Name":"test1"},{"CreatedBy":"autotest","CreatedDate":637188807017917540,"TakenDate":637188807318477040,"ExecutedDate":637188807488477103,"Executor":"Director John","IsComplete":true,"WatingTime":30,"ExecutedTime":17,"SummaryTime":47,"Status":"Запрос выполнен","StatusColor":"#00FF7F","Id":10,"Name":"test1"}]}:10,"Name":"test1"}]}:10,"Name":"test1"}]}d":10,"Name":"test1"}]}:10,"Name":"test1"}]}
+{
+  "Workers": [
+    
+    {
+      "Position": "Director",
+      "WorkingRequestId": null,
+      "Status": "Свободен",
+      "StatusColor": "#00FF7F",
+      "Id": 1,
+      "Name": "John"
+    },
+    {
+      "Position": "Manager",
+      "WorkingRequestId": null,
+      "Status": "Свободен",
+      "StatusColor": "#00FF7F",
+      "Id": 2,
+      "Name": "Bob"
+    },
+    {
+      "Position": "Operator",
+      "WorkingRequestId": null,
+      "Status": "Свободен",
+      "StatusColor": "#00FF7F",
+      "Id": 3,
+      "Name": "Alisa"
+    },
+    {
+      "Position": "Operator",
+      "WorkingRequestId": null,
+      "Status": "Свободен",
+      "StatusColor": "#00FF7F",
+      "Id": 4,
+      "Name": "Ivan"
+    }
+  ],
+  "Settings": {
+    "TimeManager": 10,
+    "TimeDirector": 30,
+    "ExecuteTimeLimitLeft": 10,
+    "ExecuteTimeLimitRight": 40
+  },
+  "Requests": [
+    {
+      "CreatedBy": "autotest",
+      "CreatedDate": 637188817204882903,
+      "TakenDate": 637188817212616749,
+      "ExecutedDate": 637188817592621111,
+      "Executor": "Operator Alisa",
+      "IsComplete": true,
+      "WatingTime": 0,
+      "ExecutedTime": 38,
+      "SummaryTime": 38,
+      "Status": "Запрос выполнен",
+      "StatusColor": "#00FF7F",
+      "Id": 1,
+      "Name": "test1"
+    },
+    {
+      "CreatedBy": "autotest",
+      "CreatedDate": 637188817222063176,
+      "TakenDate": 637188817222896502,
+      "ExecutedDate": 637188817602896564,
+      "Executor": "Operator Ivan",
+      "IsComplete": true,
+      "WatingTime": 0,
+      "ExecutedTime": 38,
+      "SummaryTime": 38,
+      "Status": "Запрос выполнен",
+      "StatusColor": "#00FF7F",
+      "Id": 2,
+      "Name": "test1"
+    },
+    {
+      "CreatedBy": "autotest",
+      "CreatedDate": 637188817237288685,
+      "TakenDate": 637188817342414414,
+      "ExecutedDate": 637188817622414472,
+      "Executor": "Manager Bob",
+      "IsComplete": true,
+      "WatingTime": 10,
+      "ExecutedTime": 28,
+      "SummaryTime": 38,
+      "Status": "Запрос выполнен",
+      "StatusColor": "#00FF7F",
+      "Id": 3,
+      "Name": "test1"
+    },
+    {
+      "CreatedBy": "autotest",
+      "CreatedDate": 637188817250134334,
+      "TakenDate": 637188817552380513,
+      "ExecutedDate": 637188817792380575,
+      "Executor": "Director John",
+      "IsComplete": true,
+      "WatingTime": 30,
+      "ExecutedTime": 24,
+      "SummaryTime": 54,
+      "Status": "Запрос выполнен",
+      "StatusColor": "#00FF7F",
+      "Id": 4,
+      "Name": "test1"
+    },
+    {
+      "CreatedBy": "autotest",
+      "CreatedDate": 637188817261581226,
+      "TakenDate": 637188817602600066,
+      "ExecutedDate": 637188817822600111,
+      "Executor": "Operator Alisa",
+      "IsComplete": true,
+      "WatingTime": 34,
+      "ExecutedTime": 22,
+      "SummaryTime": 56,
+      "Status": "Запрос выполнен",
+      "StatusColor": "#00FF7F",
+      "Id": 5,
+      "Name": "test1"
+    },
+    {
+      "CreatedBy": "autotest",
+      "CreatedDate": 637188818237222802,
+      "TakenDate": 637188818242496517,
+      "ExecutedDate": 637188818412496578,
+      "Executor": "Operator Alisa",
+      "IsComplete": true,
+      "WatingTime": 0,
+      "ExecutedTime": 17,
+      "SummaryTime": 17,
+      "Status": "Запрос выполнен",
+      "StatusColor": "#00FF7F",
+      "Id": 6,
+      "Name": "test1"
+    },
+    {
+      "CreatedBy": "autotest",
+      "CreatedDate": 637188818249601101,
+      "TakenDate": 637188818252681498,
+      "ExecutedDate": 637188818352681549,
+      "Executor": "Operator Ivan",
+      "IsComplete": true,
+      "WatingTime": 0,
+      "ExecutedTime": 10,
+      "SummaryTime": 10,
+      "Status": "Запрос выполнен",
+      "StatusColor": "#00FF7F",
+      "Id": 7,
+      "Name": "test1"
+    },
+    {
+      "CreatedBy": "autotest",
+      "CreatedDate": 637188818261290188,
+      "TakenDate": 637188818362931769,
+      "ExecutedDate": 637188818712931826,
+      "Executor": "Manager Bob",
+      "IsComplete": true,
+      "WatingTime": 10,
+      "ExecutedTime": 35,
+      "SummaryTime": 45,
+      "Status": "Запрос выполнен",
+      "StatusColor": "#00FF7F",
+      "Id": 8,
+      "Name": "test1"
+    },
+    {
+      "CreatedBy": "autotest",
+      "CreatedDate": 637188818292507903,
+      "TakenDate": 637188818364393469,
+      "ExecutedDate": 637188818604393529,
+      "Executor": "Operator Ivan",
+      "IsComplete": true,
+      "WatingTime": 7,
+      "ExecutedTime": 24,
+      "SummaryTime": 31,
+      "Status": "Запрос выполнен",
+      "StatusColor": "#00FF7F",
+      "Id": 9,
+      "Name": "test1"
+    },
+    {
+      "CreatedBy": "autotest",
+      "CreatedDate": 637188818304274091,
+      "TakenDate": 637188818422506631,
+      "ExecutedDate": 637188818762506683,
+      "Executor": "Operator Alisa",
+      "IsComplete": true,
+      "WatingTime": 11,
+      "ExecutedTime": 34,
+      "SummaryTime": 45,
+      "Status": "Запрос выполнен",
+      "StatusColor": "#00FF7F",
+      "Id": 10,
+      "Name": "test1"
+    }
+  ]
+}

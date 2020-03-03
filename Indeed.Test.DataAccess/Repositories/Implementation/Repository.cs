@@ -36,7 +36,7 @@ namespace Indeed.Test.DataAccess.Repositories.Implementation
             {
                 try
                 {
-                    using (var fs = new FileStream(_jsonDataFileName, FileMode.OpenOrCreate,
+                    using (var fs = new FileStream(_jsonDataFileName, FileMode.Truncate,
                 FileAccess.Write, FileShare.None, buffer.Length, true))
                     {
                         await fs.WriteAsync(buffer, 0, buffer.Length);

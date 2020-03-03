@@ -8,7 +8,6 @@ import "@progress/kendo-ui";
 import "@progress/kendo-ui/js/kendo.aspnetmvc";
 import "@progress/kendo-theme-default/dist/all.css"; 
 
-import { template } from './templates/main';
 import { createGrid as createRequestsGrid } from './grids/requests/grid';
 import { createGrid as createWorkersGrid } from './grids/workers/grid';
 import { default as getSettings } from './settings/get';
