@@ -28,6 +28,6 @@
     "webpack-cli": "^3.0.8"
   },
   "devDependencies": {
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.21"
   }
 }
